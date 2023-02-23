@@ -61,7 +61,7 @@ public class SettingsDialog extends DialogWrapper {
 		this.project = project;
 
 		init();
-		setTitle("SonarAnalyzer Settings");
+		setTitle("JavaEvaluator Settings");
 		setResizable(false);
 		getContentPanel().setBorder(JBUI.Borders.empty());
 		((JComponent) getContentPanel().getComponent(1)).setBorder(JBUI.Borders.empty(0, 12, 8, 12));

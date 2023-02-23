@@ -44,7 +44,7 @@ import org.apache.commons.collections.MapUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@State(name = "SonarAnalyzer-Workspace", storages = {@Storage("intellij-sonar-plugin.xml")})
+@State(name = "JavaEvaluator-Workspace", storages = {@Storage("intellij-sonar-plugin.xml")})
 public final class WorkspaceSettings implements PersistentStateComponent<WorkspaceSettings> {
 
 	@Tag

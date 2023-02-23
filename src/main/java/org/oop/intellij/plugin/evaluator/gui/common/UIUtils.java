@@ -71,7 +71,7 @@ public final class UIUtils {
 	private static final Map<String, String> UI_LANGUAGES = new HashMap<>();
 
 	static {
-		UI_LANGUAGES.put("zh", "中文");
+//		UI_LANGUAGES.put("zh", "中文");
 		UI_LANGUAGES.put("en", "English");
 	}
 

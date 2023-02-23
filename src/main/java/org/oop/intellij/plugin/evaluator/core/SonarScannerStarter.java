@@ -104,7 +104,7 @@ public abstract class SonarScannerStarter implements AnalysisAbortingListener {
 		if (!ApplicationManager.getApplication().isUnitTestMode()) {
 			final ToolWindow toolWindow = ToolWindowFactoryImpl.getWindow(project);
 			if (toolWindow == null) {
-				throw new IllegalStateException("No SonarAnalyzer ToolWindow");
+				throw new IllegalStateException("No JavaEvaluator ToolWindow");
 			}
 			/*
 			 * Important: Make sure the tool window is initialized.

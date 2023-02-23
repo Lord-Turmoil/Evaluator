@@ -57,9 +57,9 @@ public final class EmbeddedScannerHelper {
 			SonarQubeSettings connection = SettingsUtils.getSonarQubeConnection(project);
 			props.put("sonar.host.url", connection.url);
 			props.put("sonar.login", connection.token);
-			props.put("sonar.projectKey", "SonarAnalyzer:" + project.getName());
+			props.put("sonar.projectKey", "JavaEvaluator:" + project.getName());
 			props.put("sonar.projectBaseDir", project.getBasePath());
-			props.put("sonar.working.directory", "./.idea/SonarAnalyzer/.scannerwork");
+			props.put("sonar.working.directory", "./.idea/JavaEvaluator/.scannerwork");
 			props.put("sonar.java.source", IdeaUtils.getProjectSdkVersion(project));
 			props.put("sonar.tests", "");
 			// props.put("sonar.sources", IdeaUtils.getAllSourceRootPath(project));

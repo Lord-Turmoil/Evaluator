@@ -32,8 +32,8 @@ public final class PluginConstants {
 	public static final String PLUGIN_ID = "org.oop.intellij.plugin.evaluator";
 	public static final String PLUGIN_NAME = "Sonar Intellij Plugin";
 
-	public static final String TOOL_WINDOW_ID = "SonarAnalyzer";
-	public static final String ACTION_GROUP_LEFT = "SonarAnalyzer.ToolBarActions.left";
+	public static final String TOOL_WINDOW_ID = "JavaEvaluator";
+	public static final String ACTION_GROUP_LEFT = "JavaEvaluator.ToolBarActions.left";
 
 	public static final String FILE_SEPARATOR = File.separator;
 

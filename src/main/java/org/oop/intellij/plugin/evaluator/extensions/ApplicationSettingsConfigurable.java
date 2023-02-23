@@ -50,7 +50,7 @@ public class ApplicationSettingsConfigurable implements Configurable {
 
 	@Override
 	public @Nls(capitalization = Nls.Capitalization.Title) String getDisplayName() {
-		return "SonarAnalyzer";
+		return "JavaEvaluator";
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public class ApplicationSettingsConfigurable implements Configurable {
 		workspaceSettings.uiLanguageLocale = applicationSettingsPanel.getUILanguageLocale();
 		if (languageSwitched && ProjectManager.getInstance().getOpenProjects().length > 0) {
 			notificationGroup.createNotification(
-					"SonarAnalyzer",
+					"JavaEvaluator",
 					ResourcesLoader.getString("settings.uiLanguages.switchSuccess"),
 					NotificationType.INFORMATION,
 					new NotificationListener.Adapter() {

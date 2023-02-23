@@ -78,7 +78,7 @@ public class SonarIssueExternalAnnotator extends ExternalAnnotator<SonarIssueExt
 	}
 
 	private static String msg(AbstractIssue issue) {
-		return String.format("SonarAnalyzer: %s [%s]", issue.getMsg(), issue.getTypeDesc());
+		return String.format("JavaEvaluator: %s [%s]", issue.getMsg(), issue.getTypeDesc());
 	}
 
 

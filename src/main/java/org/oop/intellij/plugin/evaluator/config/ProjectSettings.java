@@ -36,7 +36,7 @@ import com.intellij.util.xmlb.annotations.Tag;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@State(name = "SonarAnalyzer-Project", storages = {@Storage("intellij-sonar-plugin-project.xml")})
+@State(name = "JavaEvaluator-Project", storages = {@Storage("intellij-sonar-plugin-project.xml")})
 public class ProjectSettings implements PersistentStateComponent<ProjectSettings> {
 
 	@Tag

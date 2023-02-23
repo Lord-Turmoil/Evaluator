@@ -5,18 +5,26 @@
 
     <!-- Public plugin name should be written in Title Case.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
-    <name>Evaluator-intellij-plugin</name>
+    <name>JavaEvaluator</name>
 
     <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
-    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="tony-turmoil@qq.com" url="http://www.tonys-studio.top">Tony's Studio</vendor>
 
     <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
          Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
          Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description><![CDATA[
-    Enter short description for your plugin here.<br>
-    <em>most HTML tags may be used</em>
+    To evaluate Java projects with SonarQube and CheckStyle.
   ]]></description>
+
+    <change-notes>
+        <![CDATA[
+        <h3>0.1.0</h3>
+        <ul>
+            <li>Not ready yet.</li>
+        </ul>
+        ]]>
+    </change-notes>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
@@ -25,6 +33,86 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <applicationService serviceImplementation="org.oop.intellij.plugin.evaluator.config.WorkspaceSettings"/>
+        <projectService serviceImplementation="org.oop.intellij.plugin.evaluator.config.ProjectSettings"/>
+        <toolWindow
+                icon="PluginIcons.LOGO_13X13"
+                factoryClass="org.oop.intellij.plugin.evaluator.extensions.ToolWindowFactoryImpl"
+                id="JavaEvaluator"
+                anchor="bottom"
+        />
+        <projectService serviceImplementation="org.oop.intellij.plugin.evaluator.service.ProblemCacheService"/>
+        <projectService serviceImplementation="org.oop.intellij.plugin.evaluator.service.GitService"/>
+        <projectService serviceImplementation="org.oop.intellij.plugin.evaluator.service.ProjectCloseListener"/>
+        <externalAnnotator language="JAVA"
+                           implementationClass="org.oop.intellij.plugin.evaluator.extensions.SonarIssueExternalAnnotator"/>
+        <externalAnnotator language="XML"
+                           implementationClass="org.oop.intellij.plugin.evaluator.extensions.SonarIssueExternalAnnotator"/>
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="org.oop.intellij.plugin.evaluator.extensions.SonarIssueLineMarkerProvider"/>
+        <codeInsight.lineMarkerProvider language="XML"
+                                        implementationClass="org.oop.intellij.plugin.evaluator.extensions.SonarIssueLineMarkerProvider"/>
+        <applicationConfigurable parentId="tools" id="org.oop.intellij.plugin.evaluator.extensions.ApplicationSettingsConfigurable"
+                                 instance="org.oop.intellij.plugin.evaluator.extensions.ApplicationSettingsConfigurable"/>
+        <projectConfigurable parentId="org.oop.intellij.plugin.evaluator.extensions.ApplicationSettingsConfigurable"
+                             instance="org.oop.intellij.plugin.evaluator.extensions.ProjectSettingsConfigurable"
+                             nonDefaultProject="true"/>
     </extensions>
+
+    <actions>
+        <group id="JavaEvaluator.AnalyzeMenu" text="JavaEvaluator" popup="true">
+            <add-to-group anchor="last" group-id="AnalyzeMenu"/>
+            <add-to-group anchor="after" group-id="EditorPopupMenu" relative-to-action="AnalyzeMenu"/>
+            <add-to-group anchor="after" group-id="ProjectViewPopupMenu" relative-to-action="AnalyzeMenu"/>
+            <action class="org.oop.intellij.plugin.evaluator.actions.AnalyzeSelectedFiles"
+                    id="JavaEvaluator.AnalyzeSelectedFiles"/>
+
+            <action class="org.oop.intellij.plugin.evaluator.actions.AnalyzeOpenFiles"
+                    id="JavaEvaluator.AnalyzeOpenFiles" icon="PluginIcons.ANALYZE_OPEN_FILES_ICON"/>
+            <action class="org.oop.intellij.plugin.evaluator.actions.AnalyzeChangelistFiles"
+                    id="JavaEvaluator.AnalyzeChangelistFiles" icon="PluginIcons.ANALYZE_CHANGELIST_FILES_ICON"/>
+            <action class="org.oop.intellij.plugin.evaluator.actions.AnalyzePackageFiles"
+                    id="JavaEvaluator.AnalyzePackageFiles" icon="PluginIcons.ANALYZE_PACKAGE_FILES_ICON"/>
+            <action class="org.oop.intellij.plugin.evaluator.actions.AnalyzeModuleFilesNotIncludingTests"
+                    id="JavaEvaluator.AnalyzeModuleFilesNotIncludingTests"
+                    icon="PluginIcons.ANALYZE_MODULE_FILES_NOT_INCLUDING_TESTS_ICON"/>
+            <action id="JavaEvaluator.ProjectFilesNotIncludingTestsAction"
+                    class="org.oop.intellij.plugin.evaluator.actions.AnalyzeProjectFilesNotIncludingTests"
+                    icon="PluginIcons.ANALYZE_PROJECT_FILES_NOT_INCLUDING_TESTS_ICON">
+            </action>
+        </group>
+
+        <group id="JavaEvaluator.ToolBarActions.left" text="JavaEvaluator Actions" popup="true">
+            <action id="JavaEvaluator.Start"
+                    class="org.oop.intellij.plugin.evaluator.actions.AnalyzeProjectFilesNotIncludingTests"
+                    icon="PluginIcons.ANALYZE_EXECUTE">
+            </action>
+
+            <separator/>
+            <action id="JavaEvaluator.Setting"
+                    class="org.oop.intellij.plugin.evaluator.actions.ShowSettingDialogAction"
+                    icon="PluginIcons.PLUGIN_SETTING">
+            </action>
+            <action id="JavaEvaluator.Setting.AutoScrollToSource"
+                    class="org.oop.intellij.plugin.evaluator.actions.AutoScrollToSourceAction"
+                    icon="PluginIcons.PLUGIN_AUTO_SCROLL_TO_SOURCE">
+            </action>
+            <separator/>
+            <action id="JavaEvaluator.Cancel"
+                    class="org.oop.intellij.plugin.evaluator.actions.ClearAndCloseToolWindowAnalyzeAction"
+                    icon="PluginIcons.ANALYZE_CLEAR">
+            </action>
+            <action id="JavaEvaluator.Help"
+                    class="org.oop.intellij.plugin.evaluator.actions.ShowHelpAction"
+                    icon="PluginIcons.PLUGIN_HELP">
+            </action>
+            <action id="JavaEvaluator.Test"
+                    class="org.oop.intellij.plugin.evaluator.actions.TestAction"
+                    text="测试"
+                    description="测试"
+                    icon="PluginIcons.SMILE">
+            </action>
+        </group>
+    </actions>
+
 </idea-plugin>
